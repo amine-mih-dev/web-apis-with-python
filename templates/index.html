@@ -18,10 +18,10 @@
             <img src="static/logo.png" alt="Lazy man's Google">
         </div>
         <div class="search-bar">
-            <form action="/search" method="get">
-                <input type="search" name="q" autocomplete="false" autofocus>
-                <button type="submit">Goggle Search</button>
-                <button type="submit">I'm Feeling Lucky</button>
+            <form method="get" type = "submit">
+                <input  name="q" autocomplete="false" autofocus>
+                <button formaction = "search" name="submit-button" value="search">Goggle Search</button>
+                <button formaction = "lucky" name = "submit-button" value="lucky">I'm Feeling Lucky</button>
             </form>
         </div>
     </div>
