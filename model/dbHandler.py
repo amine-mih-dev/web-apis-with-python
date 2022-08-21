@@ -1,3 +1,4 @@
+
 import sqlite3 as SQL
 
 
@@ -11,14 +12,14 @@ def match_exact(word: str) -> list:
     """
 
     # TODO: Establish connection to the dictionary database
-
+    db = SQL.connect( "data/dictionary.db" )
     # TODO: Query the database for exact matches
-
+    sql = "SELECT * FROM entries WHERE word =?"
     # TODO: Clone the connection to the database
-    
-
+    matches = db.execute(sql, (word,)).fetchall()
+    db.close()
     # Return the results
-    return "TODO"
+    return matches
 
 
 def match_like(word: str) -> list:
@@ -30,10 +31,11 @@ def match_like(word: str) -> list:
     4. If not return an empty list
     """
     # TODO: Establish connection to the dictionary database
-    
+    db = SQL.connect( "data/dictionary.db" )
     # TODO: Query the database for exact matches
-    
+    sql = "SELECT * FROM entries WHERE word LIKE ?"
     # TODO: Clone the connection to the database
-    
+    matches = db.execute(sql, ("%" + word + "%",)).fetchall()
     # Return the results
-    return "TODO"
+    db.close()
+    return matches

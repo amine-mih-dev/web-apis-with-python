@@ -16,7 +16,7 @@
     <ul>
         {% for word in response.json.words %}
         <li>
-            {{word.word}}: Match found? {{word.status}}
+            <h1>{{word.word}}: Match found ? {{word.status}} </h1>
             {% if word.status != 'error' %}
             <ul>
                 {% for definition in word.data %}
