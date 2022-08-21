@@ -42,7 +42,6 @@ def home():
     else:
         color = "#e4af00;"
         response = { "data" : "Is your name {} {}?".format(name.capitalize(), last_name.capitalize()), "color" : color }
-        print(response['data'])
     return render_template("index.html",response=response)
 
 if __name__ == "__main__":
