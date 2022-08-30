@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file, jsonify
+from flask import Flask, request, send_file, jsonify, render_template
 from bin.filters import apply_filter, apply_custom_filter
 
 app = Flask(__name__)
@@ -41,7 +41,6 @@ def image_filter(filter):
     3. Apply the filter using apply_filter() method from bin.filters
     4. Return the filtered image as response
     """
-    pass
     if (filter not in filters_available) and (filter not in custom_filters):
         return jsonify({"error": "Filter not available"})
 
@@ -53,6 +52,25 @@ def image_filter(filter):
     elif filter in custom_filters:
         filtered_image = apply_custom_filter(file, filter)
     return send_file(filtered_image, mimetype="image/jpeg")
+
+@app.get("/display/<filter>")
+def display_image(filter):
+    """
+    TODO:
+    apply same logic in image_filter()
+    display image in display.html
+    """
+    if (filter not in filters_available) and (filter not in custom_filters):
+        return jsonify({"error": "Filter not available"})
+
+    file = request.files["image"]
+    if not file: 
+        return jsonify({"error": "No file provided"})
+    if filter in filters_available:
+        filtered_image = apply_filter(file, filter)
+    elif filter in custom_filters:
+        filtered_image = apply_custom_filter(file, filter)
+    return render_template("display.html",filter=filter)
 
 if __name__ == "__main__":
     app.run()
