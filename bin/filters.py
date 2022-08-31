@@ -16,6 +16,7 @@ def apply_filter(file: object, filter: str) -> object:
     4. Convert the PIL Image object to file object
     5. Return the file object
     """
+    print(file)
     image = Image.open(file)
     filtered_image = image.filter(getattr(ImageFilter, filter.upper()))
     output = io.BytesIO()
@@ -24,7 +25,8 @@ def apply_filter(file: object, filter: str) -> object:
     return output
 
 def apply_custom_filter(file: object, filter: str) -> object:
-    return eval("{}({})".format(filter,str(file).split(" ")[1]))
+    filters = {"sepia": sepia, "black_and_white": black_and_white, "invert": invert}
+    return filters[filter](file)
 
 def sepia(image_path : str)-> Image:
     img = Image.open(image_path)
